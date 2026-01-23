@@ -36,7 +36,9 @@ public class Limelight extends OpMode {
         LLResult llResult = limelight.getLatestResult();
         if(llResult != null && llResult.isValid()) {
             Pose3D botPose = llResult.getBotpose_MT2();
-            telemetry.addData()
+            telemetry.addData("Tx", llResult.getTx());
+            telemetry.addData("Ty", llResult.getTy());
+            telemetry.addData("Ta", llResult.getTa());
         }
      }
 }

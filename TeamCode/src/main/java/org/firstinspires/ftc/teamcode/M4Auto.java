@@ -42,23 +42,11 @@ public class M4Auto extends LinearOpMode {
     /** Seconds to drive straight forward before starting the search spin. */
     private static final double DRIVE_FORWARD_SEC = 2;
 
-    /** Seconds to drive backwards after shooting (safety timeout). */
-    private static final double REVERSE_SEC = 4.0;
+    /** Seconds to drive backwards after shooting. */
+    private static final double REVERSE_SEC   = 3.5;
 
-    /** Target TX (degrees) to stop at while reversing. */
-    private static final double REVERSE_TARGET_TX  = 4.17;
-
-    /** Target TA (%) to stop at while reversing. */
-    private static final double REVERSE_TARGET_TA  = 0.0034;
-
-    /** Tolerance around the TX target — stops if within this many degrees. */
-    private static final double REVERSE_TX_TOL     = 1.0;
-
-    /** Tolerance around the TA target — stops if within this value. */
-    private static final double REVERSE_TA_TOL     = 0.0010;
-
-    /** How long to spin left on axis after reversing stops. */
-    private static final double TURN_LEFT_SEC      = 0.2;
+    /** Seconds to spin left on axis after reversing. */
+    private static final double TURN_LEFT_SEC = 0.4;
     private static final double TARGET_AREA_THRESHOLD = 0.05;
 
     /**
@@ -324,17 +312,8 @@ public class M4Auto extends LinearOpMode {
 
                 // ─────────────────────────────────────────────────────────────
                 case REVERSE:
-                    // Drive backwards until:
-                    //   (a) TX is within REVERSE_TX_TOL of REVERSE_TARGET_TX AND
-                    //       TA is within REVERSE_TA_TOL of REVERSE_TARGET_TA, OR
-                    //   (b) REVERSE_SEC safety timeout elapses.
-                    // Then spin left on axis for TURN_LEFT_SEC.
-                    boolean txOnTarget = tagSeen &&
-                            Math.abs(tx - REVERSE_TARGET_TX) <= REVERSE_TX_TOL;
-                    boolean taOnTarget = tagSeen &&
-                            Math.abs(ta - REVERSE_TARGET_TA) <= REVERSE_TA_TOL;
-
-                    if ((txOnTarget && taOnTarget) || stateTimer.seconds() >= REVERSE_SEC) {
+                    // Drive straight backwards for REVERSE_SEC seconds.
+                    if (stateTimer.seconds() >= REVERSE_SEC) {
                         stopDrive();
                         state = State.TURN_LEFT;
                         stateTimer.reset();

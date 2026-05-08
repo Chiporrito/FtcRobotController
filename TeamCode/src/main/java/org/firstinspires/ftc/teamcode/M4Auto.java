@@ -43,7 +43,7 @@ public class M4Auto extends LinearOpMode {
     private static final double DRIVE_FORWARD_SEC = 2;
 
     /** Seconds to drive backwards after shooting. */
-    private static final double REVERSE_SEC   = 3.5;
+    private static final double REVERSE_SEC   = 3.25;
 
     /** Seconds to spin left on axis after reversing. */
     private static final double TURN_LEFT_SEC = 0.4;
@@ -190,7 +190,7 @@ public class M4Auto extends LinearOpMode {
                         state = State.ALIGN;
                         stateTimer.reset();
                     } else {
-                        rotateCCW(SEARCH_TURN_POWER);
+                        rotateCW(SEARCH_TURN_POWER);
                     }
                     break;
 
@@ -329,7 +329,7 @@ public class M4Auto extends LinearOpMode {
                         stopDrive();
                         state = State.DONE;
                     } else {
-                        rotateCCW(SEARCH_TURN_POWER);
+                        rotateCW(SEARCH_TURN_POWER);
                     }
                     break;
 
@@ -404,6 +404,7 @@ public class M4Auto extends LinearOpMode {
     }
 
     private void rotateCCW(double power) { rotateInPlace(-Math.abs(power)); }
+    private void rotateCW(double power)  { rotateInPlace( Math.abs(power)); }
 
     private void stopDrive() {
         frontLeft.setPower(0);  frontRight.setPower(0);

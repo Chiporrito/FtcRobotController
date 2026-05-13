@@ -43,7 +43,7 @@ public class M4Auto extends LinearOpMode {
     private static final double DRIVE_FORWARD_SEC = 2;
 
     /** Seconds to drive backwards after shooting. */
-    private static final double REVERSE_SEC   = 3.5;
+    private static final double REVERSE_SEC   = 3.50;
 
     /** Seconds to spin left on axis after reversing. */
     private static final double TURN_LEFT_SEC = 0.4;
